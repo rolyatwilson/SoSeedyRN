@@ -1,5 +1,3 @@
-<script src="http://localhost:8097"></script>
-
 import React, { Component } from 'react';
 
 import { AppRegistry, StyleSheet, Text, TextInput, Button, View } from 'react-native';
@@ -79,7 +77,29 @@ export default class SoSeedyRN extends Component {
   }
 
   party = () => {
-    console.log('party!!!')
+    let self = this
+    console.log(self.state)
+    fetch('https://twilson.test.instructure.com/api/v1/courses', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer <INSERT TOKEN HERE>'
+        }
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        let blah =  responseJson;
+        console.log(blah)
+      })
+      .catch((error) => {
+        let fetchResults = response.status
+        self.setState({fetchResults})
+      })
+
+    console.log(self.state)
+    let fetchResults = 'failure'
+    self.setState({fetchResults})
+
   }
 }
 
